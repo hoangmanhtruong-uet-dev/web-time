@@ -20,7 +20,17 @@ MYSQL_PORT=3306
 MYSQL_USER=root
 MYSQL_PASSWORD=your_mysql_password
 MYSQL_DATABASE=web_time
+MYSQL_SSL=false
 ```
+
+Nếu dùng MySQL cloud như Aiven và connection yêu cầu SSL, set thêm:
+
+```bash
+MYSQL_SSL=true
+MYSQL_SSL_REJECT_UNAUTHORIZED=false
+```
+
+Để bảo mật hơn, dùng CA certificate của Aiven và set `MYSQL_SSL_CA`.
 
 ## Chạy local
 

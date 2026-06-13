@@ -14,6 +14,7 @@ const pool = mysql.createPool({
   user: process.env.MYSQL_USER || "root",
   password: process.env.MYSQL_PASSWORD || "",
   database: process.env.MYSQL_DATABASE || "web_time",
+  ssl: getMysqlSslConfig(),
   waitForConnections: true,
   connectionLimit: 10,
   namedPlaceholders: true
@@ -209,6 +210,20 @@ function getVapidKeys() {
   }
 
   return webpush.generateVAPIDKeys();
+}
+
+function getMysqlSslConfig() {
+  if (process.env.MYSQL_SSL !== "true") return undefined;
+
+  const config = {
+    rejectUnauthorized: process.env.MYSQL_SSL_REJECT_UNAUTHORIZED !== "false"
+  };
+
+  if (process.env.MYSQL_SSL_CA) {
+    config.ca = process.env.MYSQL_SSL_CA.replace(/\\n/g, "\n");
+  }
+
+  return config;
 }
 
 function normalizeEvent(input) {
