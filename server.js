@@ -44,7 +44,7 @@ app.get("/api/config", (req, res) => {
 });
 
 app.get("/api/events", asyncRoute(async (req, res) => {
-  const [rows] = await pool.query(`
+  const [rows] = await pool.execute(`
     SELECT
       id,
       title,
