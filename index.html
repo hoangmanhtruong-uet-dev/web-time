@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thời gian biểu</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1769e0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="week-info">
+        <p class="eyebrow">Thời gian biểu</p>
+        <h1 id="weekTitle">Tuần hiện tại</h1>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="week-controls" aria-label="Điều hướng tuần">
+          <button class="icon-button" id="prevWeek" type="button" aria-label="Tuần trước" title="Tuần trước">&lt;</button>
+          <button class="text-button" id="todayButton" type="button">Hôm nay</button>
+          <button class="icon-button" id="nextWeek" type="button" aria-label="Tuần sau" title="Tuần sau">&gt;</button>
+        </div>
+
+        <label class="filter-control">
+          <span>Bộ lọc</span>
+          <select id="scheduleFilter">
+            <option value="all">Tất cả lịch</option>
+            <option value="school">Lịch học trên trường</option>
+            <option value="personal">Lịch cá nhân</option>
+            <option value="Đại số">Đại số</option>
+            <option value="Lập trình">Lập trình</option>
+            <option value="Thể dục">Thể dục</option>
+            <option value="Triết học">Triết học</option>
+          </select>
+        </label>
+
+        <button class="mode-toggle" id="themeToggle" type="button" aria-label="Đổi chế độ sáng tối" title="Đổi chế độ sáng tối">
+          <span class="sun">☀</span>
+          <span class="moon">☾</span>
+        </button>
+
+        <button class="text-button" id="enableNotifications" type="button">Bật thông báo</button>
+        <button class="primary-button" id="addScheduleButton" type="button">Thêm lịch</button>
+      </div>
+    </header>
+
+    <main class="main-layout">
+      <section class="countdown-panel" aria-live="polite">
+        <div>
+          <p class="eyebrow">Sắp tới</p>
+          <h2 id="countdownTitle">Đang kiểm tra lịch học</h2>
+        </div>
+        <p id="countdownText">Không có môn nào trong hôm nay.</p>
+      </section>
+
+      <section class="board-section">
+        <div class="time-column" id="timeColumn" aria-hidden="true"></div>
+        <div class="schedule-board" id="scheduleBoard" aria-label="Bảng thời gian biểu theo tuần"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="scheduleModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">Lịch mới</p>
+          <h2 id="modalTitle">Thêm vào thời gian biểu</h2>
+        </div>
+        <button class="icon-button" id="closeModal" type="button" aria-label="Đóng" title="Đóng">×</button>
+      </div>
+
+      <form id="scheduleForm" class="schedule-form">
+        <label>
+          <span>Tên môn học/Công việc</span>
+          <input id="eventTitle" name="title" type="text" placeholder="Ví dụ: Lập trình Java" required>
+        </label>
+
+        <div class="form-grid">
+          <label>
+            <span>Ngày</span>
+            <input id="eventDate" name="date" type="date" required>
+          </label>
+          <label>
+            <span>Loại lịch</span>
+            <select id="eventType" name="type">
+              <option value="school">Lịch học trên trường</option>
+              <option value="personal">Lịch cá nhân</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            <span>Bắt đầu</span>
+            <input id="eventStart" name="start" type="time" required>
+          </label>
+          <label>
+            <span>Kết thúc</span>
+            <input id="eventEnd" name="end" type="time" required>
+          </label>
+        </div>
+
+        <label>
+          <span>Phòng học/Địa điểm</span>
+          <input id="eventLocation" name="location" type="text" placeholder="Ví dụ: A2-305 hoặc Zoom">
+        </label>
+
+        <label>
+          <span>Tên giảng viên</span>
+          <input id="eventTeacher" name="teacher" type="text" placeholder="Ví dụ: Thầy Minh">
+        </label>
+
+        <div class="modal-actions">
+          <button class="text-button" id="cancelModal" type="button">Hủy</button>
+          <button class="primary-button" type="submit">Lưu lịch</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

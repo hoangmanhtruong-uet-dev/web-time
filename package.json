@@ -1,0 +1,20 @@
+{
+  "name": "student-schedule-pwa",
+  "version": "1.0.0",
+  "description": "Timetable app with backend reminders and web push notifications.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "vapid": "node -e \"const webpush=require('web-push'); console.log(webpush.generateVAPIDKeys())\""
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.11.0",
+    "web-push": "^3.6.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
